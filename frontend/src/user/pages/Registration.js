@@ -90,6 +90,7 @@ const Registration = () => {
               variant="standard"
               type="email"
               onChange={handleEmail}
+              style={{ width: "80%" }}
               required
             />
           </Email>
@@ -100,6 +101,7 @@ const Registration = () => {
               type="password"
               variant="standard"
               onChange={handlePassword}
+              style={{ width: "80%" }}
               required
             />
           </Password>
@@ -107,9 +109,10 @@ const Registration = () => {
             <TextField
               id="standard-basic"
               label="Your Business Name"
-              //   type="password"
+              // type="password"
               variant="standard"
               onChange={handleName}
+              style={{ width: "100%" }}
               required
             />
           </BusinessName>
@@ -210,9 +213,9 @@ const Email = styled.div`
   justify-content: center;
   align-items: center;
 
-  & input {
+  /* & input {
     width: 30vw;
-  }
+  } */
 `;
 const Password = styled.div`
   width: 100%;
@@ -221,9 +224,9 @@ const Password = styled.div`
   justify-content: center;
   align-items: center;
 
-  & input {
+  /* & input {
     width: 30vw;
-  }
+  } */
 `;
 const BusinessName = styled.div`
   width: 80%;
@@ -232,7 +235,7 @@ const BusinessName = styled.div`
   justify-content: center;
   align-items: center;
   & input {
-    width: 30vw;
+    /* width: 30vw; */
     border: none;
   }
 `;

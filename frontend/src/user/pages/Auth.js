@@ -88,6 +88,7 @@ const Auth = () => {
               type="email"
               onChange={handleEmail}
               required
+              style={{ width: "80%" }}
             />
           </Email>
           <Password>
@@ -98,6 +99,7 @@ const Auth = () => {
               variant="standard"
               onChange={handlePassword}
               required
+              style={{ width: "80%" }}
             />
           </Password>
           <ButtonDiv>
@@ -196,9 +198,9 @@ const Email = styled.div`
   justify-content: center;
   align-items: center;
 
-  & input {
+  /* & input {
     width: 30vw;
-  }
+  } */
 `;
 const Password = styled.div`
   width: 100%;
@@ -207,9 +209,9 @@ const Password = styled.div`
   justify-content: center;
   align-items: center;
 
-  & input {
+  /* & input {
     width: 30vw;
-  }
+  } */
 `;
 const ButtonDiv = styled.div`
   width: 100%;

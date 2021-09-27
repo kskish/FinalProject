@@ -13,15 +13,12 @@ import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
 
 const PlaceItem = (props) => {
-  const auth = useContext(AuthContext);
   let user = sessionStorage.getItem("user");
   const [open, setOpen] = React.useState(false);
   const [address, setAddress] = useState(null);
   const [typeOfConnector, setTypeOfConnector] = useState(null);
   const [rate, setRate] = useState(null);
-
-  // console.log("user", user);
-  // console.log("id", props.id);
+  const { currentUser, setCurrentUser } = useContext(AuthContext);
 
   let history = useHistory();
 
@@ -62,12 +59,8 @@ const PlaceItem = (props) => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          // setTimeout(function () {
           setOpen(false);
           history.push("/");
-          // handleClose();
-          // }, 2000);
-          // setOpen(true);
         }
       });
   };
@@ -122,7 +115,7 @@ const PlaceItem = (props) => {
           to={`/confirmation/${props.id}`}
           style={{ textDecoration: "none" }}
         >
-          {!auth.isLoggedIn && (
+          {!user && (
             <Button variant="contained" color="success">
               Rent Here!
             </Button>
@@ -131,25 +124,15 @@ const PlaceItem = (props) => {
 
         {props.creatorId === user && (
           <>
-            {auth.isLoggedIn && (
-              // <Link
-              //   to={`/places/${props.id}`}
-              //   style={{ textDecoration: "none" }}
-              // >
+            {user && (
               <Button variant="contained" onClick={handleClickOpen}>
                 EDIT
               </Button>
-              // </Link>
             )}
-            {auth.isLoggedIn && (
-              // <Link
-              //   to={`/places/${props.id}/delete`}
-              //   style={{ textDecoration: "none" }}
-              // >
+            {user && (
               <Button variant="contained" color="error" onClick={handleClick}>
                 DELETE
               </Button>
-              // </Link>
             )}
           </>
         )}
@@ -204,7 +187,6 @@ const PlaceItem = (props) => {
 };
 
 const Wrapper = styled.div`
-  /* background: #d4d4d5; */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
@@ -217,7 +199,6 @@ const Wrapper = styled.div`
 const ButtonWrap = styled.div`
   display: flex;
   width: 100%;
-  /* background: red; */
   justify-content: space-evenly;
   margin-bottom: 10px;
 `;

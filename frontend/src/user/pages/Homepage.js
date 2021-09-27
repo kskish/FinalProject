@@ -39,7 +39,7 @@ const Text = styled.div`
   border-radius: 5px;
   opacity: 0.5;
   margin-left: 100px;
-  margin-bottom: 70px;
+  margin-bottom: 100px;
 
   & h1 {
     padding: 20px;
