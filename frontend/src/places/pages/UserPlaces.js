@@ -1,47 +1,50 @@
 import React, { useState, useEffect } from "react";
-import PlaceList from "../components/PlaceList";
+// import PlaceList from "../components/PlaceList";
 import { useParams } from "react-router";
 import styled from "styled-components";
+// import GoogleMapReact from "google-map-react";
+// import Map from "./Map";
 
 const UserPlaces = () => {
   //this will store all products from fetch
-  const [locations, setLocations] = useState();
+  const [locations, setLocations] = useState(null);
   //will become true after the data from fetch as been stored
-  const [isLoaded, setIsLoaded] = useState(false);
+  // const [isLoaded, setIsLoaded] = useState(false);
 
   //retrieve all locations
-  useEffect(() => {
-    fetch("/locations")
-      .then((res) => res.json())
-      .then((data) => {
-        setLocations(data.data);
-        setIsLoaded(true);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   fetch("/locations")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       setLocations(data.data);
+  //       // setIsLoaded(true);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+  // }, []);
+
+  // useEffect(() => {
+  //   if (!locations) {
+  //     return;
+  //   }
+  //   // console.log("we are here");
+
+  //   // setTimeout(() => {
+  //   //   let map = new window.google.maps.Map(document.getElementById("map"), {
+  //   //     center: { lat: -34.397, lng: 150.644 },
+  //   //     zoom: 8,
+  //   //   });
+  //   // }, 1000);
+  // }, [locations]);
 
   // console.log(locations, "LOCATIONS");
 
-  const userId = useParams().userId;
-  let loadedPlaces;
-  if (isLoaded) {
-    loadedPlaces = locations.filter((place) => place.owner === userId);
-  }
-
-  return (
-    <>
-      {isLoaded && (
-        <Wrapper>
-          <Map></Map>
-          <Place>
-            <PlaceList items={loadedPlaces} />
-          </Place>
-        </Wrapper>
-      )}
-    </>
-  );
+  // const { userId } = useParams();
+  // const items =
+  //   locations && locations.filter((place) => place.owner === userId);
+  // // console.log("this is items", items);
+  return <div id="map" style={{ height: "100%" }}></div>;
 };
 
 const Wrapper = styled.div`
@@ -50,10 +53,10 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const Map = styled.div`
+const MapWrapper = styled.div`
   height: 100vh;
   width: 60vw;
-  background: green;
+  background: red;
 `;
 const Place = styled.div`
   height: 100vh;
@@ -66,3 +69,16 @@ const Place = styled.div`
 `;
 
 export default UserPlaces;
+
+{
+  /* {locations && (
+        <Wrapper>
+          <MapWrapper>
+            <div id="map" style={{ height: "100%" }}></div>
+          </MapWrapper>
+          <Place>
+            <PlaceList items={items} />
+          </Place>
+        </Wrapper>
+      )} */
+}

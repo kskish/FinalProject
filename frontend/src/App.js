@@ -38,7 +38,7 @@ const App = () => {
     // >
     <CurrentUserProvider>
       <Router>
-        <GlobalStyles />
+        {/* <GlobalStyles /> */}
         <MainNavigation />
         <Switch>
           {/* Homepage, Display all users */}
