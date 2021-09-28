@@ -60,6 +60,13 @@ const PlaceItem = (props) => {
       .then((data) => {
         if (data.status === 200) {
           setOpen(false);
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Your location has been updated!",
+            showConfirmButton: false,
+            timer: 2000,
+          });
           history.push("/");
         }
       });

@@ -61,7 +61,7 @@ const Button = styled.button`
   /* margin: 4px 2px; */
   cursor: pointer;
   /* margin-top: -15px; */
-  transition: all 0.9s ease-in-out;
+  transition: all 0.4s ease-in-out;
 
   /* &:hover {
     transform: scale(1.2);

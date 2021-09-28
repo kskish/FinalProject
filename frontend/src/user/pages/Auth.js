@@ -6,7 +6,8 @@ import Button from "@mui/material/Button";
 import { useHistory } from "react-router";
 import { AuthContext } from "../../shared/components/context/AuthContext";
 import { Link } from "react-router-dom";
-import img from "../../assets/bmw.jpeg";
+// import img from "../../assets/bmw.jpeg";
+import img from "../../assets/tesla_black.jpg";
 import { right } from "@popperjs/core";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
@@ -59,7 +60,7 @@ const Auth = () => {
           setTimeout(function () {
             history.push("/");
             window.location.reload();
-          }, 2000);
+          }, 1000);
           setOpen(true);
         }
       });

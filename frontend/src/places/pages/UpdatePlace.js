@@ -74,7 +74,7 @@ const UpdatePlace = () => {
           setTimeout(function () {
             history.push("/");
           }, 2000);
-          setOpen(true);
+          setOpen(false);
         }
       });
   };

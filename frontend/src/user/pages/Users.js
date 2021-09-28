@@ -58,6 +58,7 @@ const UsersWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #04612e;
+  /* background-color: #32502e; */
   max-height: 100vh;
   width: 30vw;
   overflow-y: scroll;
