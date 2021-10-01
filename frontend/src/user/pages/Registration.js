@@ -1,20 +1,16 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router";
-import { AuthContext } from "../../shared/components/context/AuthContext";
+// import { AuthContext } from "../../shared/components/context/AuthContext";
 import { Link } from "react-router-dom";
 import img from "../../assets/tesla.jpg";
-import { right } from "@popperjs/core";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
 const Registration = () => {
-  //   const placeId = useParams().placeId;
   let history = useHistory();
-  const auth = useContext(AuthContext);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [businessName, setBusinessName] = useState(null);
@@ -170,7 +166,7 @@ const FormContainer = styled.div`
   display: flex;
   height: 500px;
   width: 800px;
-  margin-top: 20px;
+  margin-top: 50px;
   align-items: center;
   justify-content: center;
   border-radius: 2px;
@@ -185,9 +181,9 @@ const Image = styled.div`
 `;
 const Form = styled.form`
   display: flex;
-  height: 100vh;
+  height: 100%;
   width: 60%;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   align-items: center;
   justify-content: center;
   flex-direction: column;

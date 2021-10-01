@@ -1,21 +1,17 @@
 import React, { useState, useContext } from "react";
 import styled from "styled-components";
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router";
 import { AuthContext } from "../../shared/components/context/AuthContext";
 import { Link } from "react-router-dom";
-// import img from "../../assets/bmw.jpeg";
 import img from "../../assets/tesla_black.jpg";
-import { right } from "@popperjs/core";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
 
 const Auth = () => {
-  const placeId = useParams().placeId;
   let history = useHistory();
-  const auth = useContext(AuthContext);
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
   const [open, setOpen] = React.useState(false);
@@ -54,7 +50,6 @@ const Auth = () => {
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
-          // auth.login();
           setCurrentUser(true);
           sessionStorage.setItem("user", data.data._id);
           setTimeout(function () {
@@ -104,7 +99,6 @@ const Auth = () => {
             />
           </Password>
           <ButtonDiv>
-            {/* <button type="submit">Sign In</button> */}
             <Button type="submit" variant="contained">
               Sign In
             </Button>
@@ -156,7 +150,7 @@ const FormContainer = styled.div`
   display: flex;
   height: 500px;
   width: 800px;
-  margin-top: 20px;
+  margin-top: 50px;
   align-items: center;
   justify-content: center;
   border-radius: 2px;
@@ -171,9 +165,8 @@ const Image = styled.div`
 `;
 const Form = styled.form`
   display: flex;
-  height: 100vh;
+  height: 100%;
   width: 60%;
-  margin-top: 20px;
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -198,10 +191,6 @@ const Email = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* & input {
-    width: 30vw;
-  } */
 `;
 const Password = styled.div`
   width: 100%;
@@ -209,10 +198,6 @@ const Password = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* & input {
-    width: 30vw;
-  } */
 `;
 const ButtonDiv = styled.div`
   width: 100%;

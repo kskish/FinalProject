@@ -36,8 +36,9 @@ const Wrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column; */
-  height: 70vh;
-  width: 30vw;
+  background-color: #04612e;
+  height: 100%;
+  width: 100%;
 `;
 
 export default PlaceList;

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import PlaceList from "../components/PlaceList";
 import { useParams } from "react-router";
 import styled from "styled-components";
+import Map from "./Map";
 
 const UserPlaces = () => {
   //this will store all products from fetch
@@ -30,11 +31,19 @@ const UserPlaces = () => {
     loadedPlaces = locations.filter((place) => place.owner === userId);
   }
 
+  // if (isLoaded) {
+  //   loadedPlaces.map((place) => {
+  //     console.log(place.address, "this is place");
+  //   });
+  // }
+
   return (
     <>
       {isLoaded && (
         <Wrapper>
-          <Map></Map>
+          <MapWrapper>
+            <Map loadedPlaces={loadedPlaces} />
+          </MapWrapper>
           <Place>
             <PlaceList items={loadedPlaces} />
           </Place>
@@ -50,7 +59,7 @@ const Wrapper = styled.div`
   display: flex;
 `;
 
-const Map = styled.div`
+const MapWrapper = styled.div`
   height: 100vh;
   width: 60vw;
   background: green;
@@ -58,10 +67,9 @@ const Map = styled.div`
 const Place = styled.div`
   height: 100vh;
   width: 40vw;
-  /* background: orange; */
+  background: green;
   display: flex;
   justify-content: center;
-  /* align-items: center; */
   overflow-y: scroll;
 `;
 

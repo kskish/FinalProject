@@ -72,7 +72,7 @@ const NewPlace = () => {
         <div>
           <TextField
             id="outlined-basic"
-            label="Adrress"
+            label="Address"
             variant="standard"
             onChange={handleAddress}
           />

@@ -1,11 +1,10 @@
 import React, { useContext } from "react";
-import { Link, NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { AuthContext } from "../context/AuthContext";
 
 const NavLinks = (props) => {
   let user = sessionStorage.getItem("user");
-  console.log(user, "This is user");
 
   const { currentUser, setCurrentUser } = useContext(AuthContext);
 
@@ -13,21 +12,9 @@ const NavLinks = (props) => {
     <NavigationLink>
       <Wrapper>
         <NavLinkBar to="/locations">All Locations</NavLinkBar>
-        {user && (
-          <NavLinkBar to={`/${user}/places`} exact>
-            My Location
-          </NavLinkBar>
-        )}
-        {user && (
-          <NavLinkBar to="/places/new" exact>
-            New Location
-          </NavLinkBar>
-        )}
-        {!user && (
-          <NavLinkBar to="/authenticate" exact>
-            Sign In
-          </NavLinkBar>
-        )}
+        {user && <NavLinkBar to={`/${user}/places`}>My Location</NavLinkBar>}
+        {user && <NavLinkBar to="/places/new">New Location</NavLinkBar>}
+        {!user && <NavLinkBar to="/authenticate">Sign In</NavLinkBar>}
         {user && (
           <NavLinkBar
             to="/authenticate"

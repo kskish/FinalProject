@@ -1,21 +1,13 @@
 import React, { useState } from "react";
-import { useParams } from "react-router";
+// import { useParams } from "react-router";
 import styled from "styled-components";
 import "./confirmation.css";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 
-import {
-  Visa,
-  Amex,
-  Mastercard,
-  InteracLogo,
-  Applepay,
-  Wechatpay,
-} from "react-pay-icons";
+import { Visa, Amex, Mastercard, InteracLogo } from "react-pay-icons";
 import { Car, User, Envelope } from "phosphor-react";
 const Confirmation = () => {
-  const placeId = useParams().id;
   let history = useHistory();
   const [name, setName] = useState(null);
 
@@ -48,13 +40,12 @@ const Confirmation = () => {
         position: "center",
         icon: "success",
         title: `Thank you ${name}!`,
-        html: "A confirmation email as been sent to you with your 4-pin code",
+        html: "A confirmation email as been sent to you with your 4 digit pin code",
         showConfirmButton: true,
         timer: 7000,
       });
       setTimeout(function () {
         history.push("/");
-        // window.location.reload();
       }, 2000);
     });
   };
@@ -185,19 +176,6 @@ const Wrapper = styled.div`
   overflow: hidden;
 `;
 
-const Form = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: 3px solid black;
-  border-radius: 10px;
-  margin: 50px;
-  padding: 20px;
-  background: #dddddd;
-  & div {
-    padding: 10px;
-  }
-`;
-
 const ButtonStyle = styled.div`
   width: 100%;
   display: flex;
@@ -219,7 +197,6 @@ const Title = styled.div`
     margin-left: 7px;
     margin-top: 2px;
   }
-  /* align-items: center; */
 `;
 
 const Container = styled.div`

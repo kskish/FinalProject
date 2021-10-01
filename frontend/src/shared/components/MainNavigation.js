@@ -1,5 +1,4 @@
 import React from "react";
-import MainHeder from "./UIElements/MainHeder";
 import { Link } from "react-router-dom";
 import NavLinks from "./UIElements/NavLinks";
 import styled from "styled-components";
@@ -22,7 +21,6 @@ const MainNavigation = () => {
 };
 
 const Wrapper = styled.div`
-  /* background: #2929f7; */
   background: #1c1c1c;
   color: white;
   height: 50px;
@@ -30,6 +28,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-right: 20px;
 `;
 
 const Title = styled.div`

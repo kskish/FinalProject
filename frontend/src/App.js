@@ -1,4 +1,4 @@
-import React, { useState, useCallback } from "react";
+import React from "react";
 import {
   BrowserRouter as Router,
   Route,
@@ -13,32 +13,14 @@ import UserPlaces from "./places/pages/UserPlaces";
 import MainNavigation from "./shared/components/MainNavigation";
 import Auth from "./user/pages/Auth";
 import Users from "./user/pages/Users";
-import {
-  AuthContext,
-  CurrentUserProvider,
-} from "./shared/components/context/AuthContext";
+import { CurrentUserProvider } from "./shared/components/context/AuthContext";
 import Homepage from "./user/pages/Homepage";
-import GlobalStyles from "./shared/components/GlobalStyles";
 import Registration from "./user/pages/Registration";
 
 const App = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  const login = useCallback(() => {
-    setIsLoggedIn(true);
-  }, []);
-
-  const logout = useCallback(() => {
-    setIsLoggedIn(false);
-  }, []);
-
   return (
-    // <AuthContext.Provider
-    // value={{ isLoggedIn: isLoggedIn, login: login, logout: logout }}
-    // >
     <CurrentUserProvider>
       <Router>
-        <GlobalStyles />
         <MainNavigation />
         <Switch>
           {/* Homepage, Display all users */}

@@ -2,14 +2,6 @@ import React, { useState } from "react";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
-// import MuiAlert from "@mui/material/Alert";
-// import Snackbar from "@mui/material/Snackbar";
-import Dialog from "@mui/material/Dialog";
-import DialogActions from "@mui/material/DialogActions";
-import DialogContent from "@mui/material/DialogContent";
-import DialogContentText from "@mui/material/DialogContentText";
-import DialogTitle from "@mui/material/DialogTitle";
 import { useHistory } from "react-router";
 
 const UpdatePlace = () => {
@@ -20,25 +12,6 @@ const UpdatePlace = () => {
   const [typeOfConnector, setTypeOfConnector] = useState(null);
   const [rate, setRate] = useState(null);
   const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
-
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  // const Alert = React.forwardRef(function Alert(props, ref) {
-  //   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-  // });
-  // const handleClose = (event, reason) => {
-  //   if (reason === "clickaway") {
-  //     return;
-  //   }
-
-  //   setOpen(false);
-  // };
 
   const handleAddress = (e) => {
     setAddress(e.target.value);

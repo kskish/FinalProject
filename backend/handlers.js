@@ -4,8 +4,10 @@ const e = require("express");
 const { MongoClient } = require("mongodb");
 
 require("dotenv").config();
+const opencage = require("opencage-api-client");
 
 const { MONGO_URI } = process.env;
+const { OPENCAGE_URI } = process.env;
 
 const options = {
   useNewUrlParser: true,
@@ -57,7 +59,7 @@ const getAllLocations = async (req, res) => {
   const db = client.db("JuiceHere");
   console.log("connected!");
 
-  // Find all reservations in collection
+  // Find all locations in collection
   const users = await db.collection("locations").find().toArray();
 
   if (users.length > 0) {
@@ -148,6 +150,30 @@ const handleLogin = async (req, res) => {
   console.log("disconnected!");
 };
 
+//getAddressPostion
+const getPositionFromAddress = (address) => {
+  const requestObj = {
+    key: OPENCAGE_URI,
+    q: address,
+  };
+
+  // return something...
+  return opencage
+    .geocode(requestObj)
+    .then((data) => {
+      if (data.results.length > 0) {
+        const place = data.results[0];
+        return place.geometry;
+      } else {
+        console.log("Status", data.status.message);
+        console.log("total_results", data.total_results);
+      }
+    })
+    .catch((error) => {
+      console.log("Error!", error);
+    });
+};
+
 // ADD new location
 const addNewLocation = async (req, res) => {
   const { owner } = req.body;
@@ -164,10 +190,22 @@ const addNewLocation = async (req, res) => {
 
   const random = Math.floor(Math.random() * 100000) + 1;
 
+  const address = req.body.address;
+
+  let lat = "";
+  let lng = "";
+
+  await getPositionFromAddress(address).then((response) => {
+    lat = response.lat;
+    lng = response.lng;
+  });
+
   const newLocation = {
     // _id: uuidv4(),
     _id: `${random}`,
     ...req.body,
+    lat: lat,
+    lng: lng,
   };
 
   try {

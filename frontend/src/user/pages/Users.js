@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import UserList from "../components/UserList";
 import styled from "styled-components";
-import AnimatedShapes from "../../shared/components/Animation/AnimatedShapes";
+// import AnimatedShapes from "../../shared/components/Animation/AnimatedShapes";
 import img from "../../assets/tesla.jpeg";
 
 const Users = () => {
@@ -38,8 +38,6 @@ const Users = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  /* flex-direction: column; */
-  /* background-color: #f0e5cf; */
   height: 100vh;
   width: 100vw;
 `;
@@ -58,22 +56,21 @@ const UsersWrapper = styled.div`
   justify-content: center;
   align-items: center;
   background-color: #04612e;
-  /* background-color: #32502e; */
   max-height: 100vh;
   width: 30vw;
   overflow-y: scroll;
 `;
 
-const Shape = styled.div`
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  z-index: -5;
-  top: 0;
-  left: 0;
-  clip-path: polygon(67% 0, 100% 0%, 100% 100%, 55% 100%);
-  /* clip-path: polygon(66% 0, 100% 0%, 100% 100%, 42% 100%); */
-  background-color: #2929f7;
-`;
+// const Shape = styled.div`
+//   width: 100%;
+//   height: 100%;
+//   position: absolute;
+//   z-index: -5;
+//   top: 0;
+//   left: 0;
+//   clip-path: polygon(67% 0, 100% 0%, 100% 100%, 55% 100%);
+//   /* clip-path: polygon(66% 0, 100% 0%, 100% 100%, 42% 100%); */
+//   background-color: #2929f7;
+// `;
 
 export default Users;

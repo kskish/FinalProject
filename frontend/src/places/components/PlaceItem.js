@@ -1,8 +1,7 @@
-import React, { useContext, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Button from "@mui/material/Button";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../shared/components/context/AuthContext";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
 import Dialog from "@mui/material/Dialog";
@@ -18,7 +17,6 @@ const PlaceItem = (props) => {
   const [address, setAddress] = useState(null);
   const [typeOfConnector, setTypeOfConnector] = useState(null);
   const [rate, setRate] = useState(null);
-  const { currentUser, setCurrentUser } = useContext(AuthContext);
 
   let history = useHistory();
 
@@ -109,14 +107,19 @@ const PlaceItem = (props) => {
   return (
     <Wrapper>
       <h3>{props.businessName}</h3>
-      <p>Address: {props.address}</p>
       <p>
-        Type of charger:{" "}
+        <strong>Address: </strong>
+        {props.address}
+      </p>
+      <p>
+        <strong>Type of charger:</strong>{" "}
         {props.chargeType.map((type, index) => {
           return ` -- ${type}    `;
         })}
       </p>
-      <p>Rate per hour: {props.rate}.00 $/h</p>
+      <p>
+        <strong>Rate per hour:</strong> {props.rate}.00 $/h
+      </p>
       <ButtonWrap>
         <Link
           to={`/confirmation/${props.id}`}
@@ -200,7 +203,8 @@ const Wrapper = styled.div`
   margin: 15px auto;
   width: 400px;
   height: 250px;
-  padding: 10px;
+  padding: 15px;
+  background-color: white;
 `;
 
 const ButtonWrap = styled.div`
