@@ -59,6 +59,8 @@ const Auth = () => {
           setOpen(true);
         }
       });
+
+    console.log("im in auth");
   };
 
   return (
@@ -103,6 +105,7 @@ const Auth = () => {
               Sign In
             </Button>
             <div>
+              <p style={{ marginRight: "5px" }}>Don't have an account yet?</p>
               <Link
                 to={"/registration"}
                 style={{ textDecoration: "none", color: "#aeaeae" }}

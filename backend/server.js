@@ -14,6 +14,7 @@ const {
   deleteLocation,
   updateLocation,
   addUser,
+  getUser,
 } = require("./handlers");
 
 express()
@@ -24,8 +25,9 @@ express()
   .use(express.json())
 
   .get("/users", getAllUsers)
+  .get("/user/:_id", getUser)
   .get("/locations", getAllLocations)
-  .get("/locations/:id", getUserLocations)
+  .get("/locations/:_id", getUserLocations)
   .post("/login", handleLogin)
   .post("/location", addNewLocation)
   .post("/user", addUser)

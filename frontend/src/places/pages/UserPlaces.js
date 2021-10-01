@@ -36,6 +36,7 @@ const UserPlaces = () => {
   //     console.log(place.address, "this is place");
   //   });
   // }
+  console.log(loadedPlaces);
 
   return (
     <>
@@ -62,12 +63,12 @@ const Wrapper = styled.div`
 const MapWrapper = styled.div`
   height: 100vh;
   width: 60vw;
-  background: green;
+  background: #04612e;
 `;
 const Place = styled.div`
-  height: 100vh;
+  height: 95vh;
   width: 40vw;
-  background: green;
+  background: #04612e;
   display: flex;
   justify-content: center;
   overflow-y: scroll;

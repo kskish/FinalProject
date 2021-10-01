@@ -28,7 +28,6 @@ const Users = () => {
   }
   return (
     <Wrapper>
-      {/* <Shape /> */}
       <MapContainer></MapContainer>
       <UsersWrapper>{isLoaded && <UserList users={users} />}</UsersWrapper>
       {/* <AnimatedShapes /> */}
@@ -60,17 +59,5 @@ const UsersWrapper = styled.div`
   width: 30vw;
   overflow-y: scroll;
 `;
-
-// const Shape = styled.div`
-//   width: 100%;
-//   height: 100%;
-//   position: absolute;
-//   z-index: -5;
-//   top: 0;
-//   left: 0;
-//   clip-path: polygon(67% 0, 100% 0%, 100% 100%, 55% 100%);
-//   /* clip-path: polygon(66% 0, 100% 0%, 100% 100%, 42% 100%); */
-//   background-color: #2929f7;
-// `;
 
 export default Users;

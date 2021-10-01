@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
@@ -16,6 +16,7 @@ const NewPlace = () => {
   const [typeOfConnector, setTypeOfConnector] = useState(null);
   const [rate, setRate] = useState(null);
   const [open, setOpen] = React.useState(false);
+  const [userName, setUserName] = useState(null);
 
   const handleAddress = (e) => {
     setAddress(e.target.value);
@@ -38,6 +39,17 @@ const NewPlace = () => {
     setOpen(false);
   };
 
+  useEffect(() => {
+    fetch(`/user/${user}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setUserName(data.data.businessName);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
+  }, []);
+
   const placeSubmitHandler = (e) => {
     e.preventDefault();
 
@@ -48,6 +60,7 @@ const NewPlace = () => {
       },
       body: JSON.stringify({
         owner: user,
+        businessName: userName,
         address: address,
         chargeType: [typeOfConnector],
         rate: rate,

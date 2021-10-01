@@ -79,6 +79,23 @@ const getAllLocations = async (req, res) => {
   console.log("disconnected!");
 };
 
+const getUser = async (req, res) => {
+  const client = new MongoClient(MONGO_URI, options);
+  await client.connect();
+  const db = client.db("JuiceHere");
+  console.log("connected!");
+
+  const { _id } = req.params;
+
+  await db.collection("users").findOne({ _id }, (err, result) => {
+    result
+      ? res.status(200).json({ status: 200, _id, data: result })
+      : res.status(404).json({ status: 404, _id, data: "Not Found" });
+    client.close();
+    console.log("disconnected!");
+  });
+};
+
 //Get all locations from specific user
 const getUserLocations = async (req, res) => {
   // creates a new client
@@ -352,4 +369,5 @@ module.exports = {
   deleteLocation,
   updateLocation,
   addUser,
+  getUser,
 };

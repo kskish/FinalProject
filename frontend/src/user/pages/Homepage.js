@@ -15,7 +15,7 @@ const Homepage = () => {
 
           <div className="box-2">
             <div className="btn btn-two">
-              <span>VIEW ALL</span>
+              <span style={{ letterSpacing: "7px" }}>VIEW ALL</span>
             </div>
           </div>
         </Link>

@@ -7,7 +7,7 @@ const MainNavigation = () => {
   return (
     <Wrapper>
       <Title>
-        <h2>
+        <h2 style={{ letterSpacing: "2px" }}>
           <Link to="/" style={{ textDecoration: "none", color: "white" }}>
             Juice Here
           </Link>
@@ -28,7 +28,7 @@ const Wrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding-right: 20px;
+  /* padding-right: 5px; */
 `;
 
 const Title = styled.div`

@@ -104,6 +104,8 @@ const PlaceItem = (props) => {
     });
   };
 
+  console.log(props.businessName);
+
   return (
     <Wrapper>
       <h3>{props.businessName}</h3>
@@ -201,10 +203,16 @@ const Wrapper = styled.div`
     rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
   margin: 15px auto;
-  width: 400px;
+  width: 75%;
   height: 250px;
   padding: 15px;
   background-color: white;
+
+  & h3 {
+    text-decoration: underline;
+    text-decoration-color: green;
+    text-decoration-thickness: 2px;
+  }
 `;
 
 const ButtonWrap = styled.div`
