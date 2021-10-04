@@ -90,21 +90,6 @@ const NavLinks = (props) => {
                 </MenuItem>
               </NavLinkBar>
             </Menu>
-
-            {/* {user && <NavLinkBar to="/places/new">New Location</NavLinkBar>} */}
-            {/* {!user && <NavLinkBar to="/authenticate">Sign In</NavLinkBar>} */}
-            {/* {user && (
-              <NavLinkBar
-                to="/authenticate"
-                exact
-                onClick={() => {
-                  setCurrentUser(false);
-                  sessionStorage.clear();
-                }}
-              >
-                Logout
-              </NavLinkBar>
-            )} */}
           </>
         )}
         {!user && <NavLinkBar to="/authenticate">Sign In</NavLinkBar>}

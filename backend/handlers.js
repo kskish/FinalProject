@@ -97,35 +97,55 @@ const getUser = async (req, res) => {
 };
 
 //Get all locations from specific user
-const getUserLocations = async (req, res) => {
-  // creates a new client
+// const getUserLocations = async (req, res) => {
+//   // creates a new client
+//   const client = new MongoClient(MONGO_URI, options);
+
+//   // connect to the client
+//   await client.connect();
+
+//   // connect to the database (db name is provided as an argument to the function)
+//   const db = client.db("JuiceHere");
+//   console.log("connected!");
+
+//   // Find all reservations in collection
+//   const users = await db.collection("users").find().toArray();
+
+//   if (users.length > 0) {
+//     res.status(200).json({
+//       status: 200,
+//       data: users,
+//       messege: "get all users successful",
+//     });
+//   } else {
+//     res.status(404).json({
+//       status: 404,
+//       error: "get all users unsuccessful",
+//     });
+//   }
+//   // close the connection to the database server
+//   client.close();
+//   console.log("disconnected!");
+// };
+
+//Get a locations from specific user
+const getLocation = async (req, res) => {
   const client = new MongoClient(MONGO_URI, options);
-
-  // connect to the client
   await client.connect();
-
-  // connect to the database (db name is provided as an argument to the function)
   const db = client.db("JuiceHere");
   console.log("connected!");
 
-  // Find all reservations in collection
-  const users = await db.collection("users").find().toArray();
+  const { _id } = req.params;
 
-  if (users.length > 0) {
-    res.status(200).json({
-      status: 200,
-      data: users,
-      messege: "get all users successful",
-    });
-  } else {
-    res.status(404).json({
-      status: 404,
-      error: "get all users unsuccessful",
-    });
-  }
-  // close the connection to the database server
-  client.close();
-  console.log("disconnected!");
+  await db.collection("locations").findOne({ _id }, (err, result) => {
+    result
+      ? res.status(200).json({ status: 200, _id, data: result })
+      : res
+          .status(404)
+          .json({ status: 404, _id, data: "No result from this search" });
+    client.close();
+    console.log("disconnected!");
+  });
 };
 
 // POST Login validation
@@ -365,7 +385,8 @@ module.exports = {
   getAllLocations,
   handleLogin,
   addNewLocation,
-  getUserLocations,
+  // getUserLocations,
+  getLocation,
   deleteLocation,
   updateLocation,
   addUser,

@@ -23,20 +23,11 @@ const UserPlaces = () => {
       });
   }, []);
 
-  // console.log(locations, "LOCATIONS");
-
   const userId = useParams().userId;
   let loadedPlaces;
   if (isLoaded) {
     loadedPlaces = locations.filter((place) => place.owner === userId);
   }
-
-  // if (isLoaded) {
-  //   loadedPlaces.map((place) => {
-  //     console.log(place.address, "this is place");
-  //   });
-  // }
-  console.log(loadedPlaces);
 
   return (
     <>

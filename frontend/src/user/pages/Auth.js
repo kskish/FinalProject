@@ -9,6 +9,7 @@ import { Link } from "react-router-dom";
 import img from "../../assets/tesla_black.jpg";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import Swal from "sweetalert2";
 
 const Auth = () => {
   let history = useHistory();
@@ -57,10 +58,16 @@ const Auth = () => {
             window.location.reload();
           }, 1000);
           setOpen(true);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            // text: 'Something went wrong!',
+            text: "Please provide a valid email address and password. If you continue to have issues logging into your account, contact our Support team.",
+            // footer: '<a href="">Why do I have this issue?</a>',
+          });
         }
       });
-
-    console.log("im in auth");
   };
 
   return (

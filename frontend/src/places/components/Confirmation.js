@@ -1,15 +1,34 @@
-import React, { useState } from "react";
-// import { useParams } from "react-router";
+import React, { useState, useEffect } from "react";
+import { useParams } from "react-router";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import "./confirmation.css";
 import Swal from "sweetalert2";
 import { useHistory } from "react-router";
+import Button from "@mui/material/Button";
 
 import { Visa, Amex, Mastercard, InteracLogo } from "react-pay-icons";
 import { Car, User, Envelope } from "phosphor-react";
 const Confirmation = () => {
   let history = useHistory();
   const [name, setName] = useState(null);
+  const [location, setLocation] = useState(null);
+
+  //Get the current location ID from URL
+  const locationId = useParams().id;
+
+  useEffect(() => {
+    fetch(`/location/${locationId}`)
+      .then((res) => res.json())
+      .then((data) => {
+        setLocation(data.data);
+      })
+      .catch((error) => {
+        console.log("Error in fetching friends", error);
+      });
+  }, []);
+
+  console.log(location);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -56,112 +75,147 @@ const Confirmation = () => {
 
   return (
     <Wrapper>
-      <Container>
-        <div className="row">
-          <div className="col-75">
-            <div className="container">
-              <form onSubmit={handleSubmit}>
-                <div className="row">
-                  <div className="col-50">
-                    <h3>Contact Information</h3>
-                    <Title>
-                      <User size={20} />
-                      <label for="fname">Full Name</label>
-                    </Title>
-                    <input
-                      type="text"
-                      id="fname"
-                      name="firstname"
-                      placeholder="John M. Doe"
-                      onChange={handleName}
-                    />
-                    <Title>
-                      <Envelope size={20} />
-                      <label for="email">Email</label>
-                    </Title>
-                    <input
-                      type="text"
-                      id="email"
-                      name="email"
-                      placeholder="john@example.com"
-                    />
-                    <Title>
-                      <Car size={20} />
-                      <label for="plateNumber">Licence Plate </label>
-                    </Title>
-                    <input
-                      type="text"
-                      id="numberPlate"
-                      name="numberPlate"
-                      placeholder="G12 MCM"
-                    />
+      {location && (
+        <Container>
+          <div className="row">
+            <div className="col-75">
+              <div className="container">
+                <div style={{ display: "colume" }}>
+                  <div>
+                    <h2>{location.businessName}</h2>
                   </div>
-
-                  <div className="col-50">
-                    <h3>Payment</h3>
-                    <label for="fname">Accepted Cards</label>
-                    <div className="icon-container">
-                      <InteracLogo
-                        style={{ margin: 2, width: 32, borderRadius: 7 }}
-                      />
-                      <Visa style={{ margin: 2, width: 50 }} />
-                      <Mastercard style={{ margin: 2, width: 50 }} />
-                      <Amex style={{ margin: 2, width: 50 }} />
-                    </div>
-                    <label for="cname">Name on Card</label>
-                    <input
-                      type="text"
-                      id="cname"
-                      name="cardname"
-                      placeholder="John More Doe"
-                    />
-                    <label for="ccnum">Credit card number</label>
-                    <input
-                      type="text"
-                      id="ccnum"
-                      name="cardnumber"
-                      placeholder="1111-2222-3333-4444"
-                    />
-                    <label for="expmonth">Exp Month</label>
-                    <input
-                      type="text"
-                      id="expmonth"
-                      name="expmonth"
-                      placeholder="September"
-                    />
-
-                    <div className="row">
-                      <div className="col-50">
-                        <label for="expyear">Exp Year</label>
-                        <input
-                          type="text"
-                          id="expyear"
-                          name="expyear"
-                          placeholder="2025"
-                        />
-                      </div>
-                      <div className="col-50">
-                        <label for="cvv">CVV</label>
-                        <input
-                          type="text"
-                          id="cvv"
-                          name="cvv"
-                          placeholder="352"
-                        />
-                      </div>
-                    </div>
+                  <div>
+                    <strong>Location: </strong>
+                    {location.address}
+                  </div>
+                  <div>
+                    <strong>Connector: </strong>
+                    {location.chargeType}
+                  </div>
+                  <div>
+                    <strong>Rate per hour: </strong>
+                    {location.rate}
                   </div>
                 </div>
-                <ButtonStyle>
-                  <button type="submit" className="btn">
-                    Pay now
-                  </button>
-                </ButtonStyle>
-              </form>
+                <form onSubmit={handleSubmit}>
+                  <div className="row">
+                    <div className="col-50">
+                      <h3>Contact Information</h3>
+                      <Title>
+                        <User size={20} />
+                        <label for="fname">Full Name</label>
+                      </Title>
+                      <input
+                        type="text"
+                        id="fname"
+                        name="firstname"
+                        placeholder="John M. Doe"
+                        onChange={handleName}
+                      />
+                      <Title>
+                        <Envelope size={20} />
+                        <label for="email">Email</label>
+                      </Title>
+                      <input
+                        type="text"
+                        id="email"
+                        name="email"
+                        placeholder="john@example.com"
+                      />
+                      <Title>
+                        <Car size={20} />
+                        <label for="plateNumber">Licence Plate </label>
+                      </Title>
+                      <input
+                        type="text"
+                        id="numberPlate"
+                        name="numberPlate"
+                        placeholder="G12 MCM"
+                      />
+                    </div>
+
+                    <div className="col-50">
+                      <h3>Payment</h3>
+                      <label for="fname">Accepted Cards</label>
+                      <div className="icon-container">
+                        <InteracLogo
+                          style={{ margin: 2, width: 32, borderRadius: 7 }}
+                        />
+                        <Visa style={{ margin: 2, width: 50 }} />
+                        <Mastercard style={{ margin: 2, width: 50 }} />
+                        <Amex style={{ margin: 2, width: 50 }} />
+                      </div>
+                      <label for="cname">Name on Card</label>
+                      <input
+                        type="text"
+                        id="cname"
+                        name="cardname"
+                        placeholder="John More Doe"
+                      />
+                      <label for="ccnum">Credit card number</label>
+                      <input
+                        type="text"
+                        id="ccnum"
+                        name="cardnumber"
+                        placeholder="1111-2222-3333-4444"
+                      />
+                      <label for="expmonth">Exp Month</label>
+                      <input
+                        type="text"
+                        id="expmonth"
+                        name="expmonth"
+                        placeholder="September"
+                      />
+
+                      <div className="row">
+                        <div className="col-50">
+                          <label for="expyear">Exp Year</label>
+                          <input
+                            type="text"
+                            id="expyear"
+                            name="expyear"
+                            placeholder="2025"
+                          />
+                        </div>
+                        <div className="col-50">
+                          <label for="cvv">CVV</label>
+                          <input
+                            type="text"
+                            id="cvv"
+                            name="cvv"
+                            placeholder="352"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <ButtonStyle>
+                    {/* <button type="submit" className="btn">
+                      Pay now
+                    </button>
+                    <button type="text" className="btn">
+                      Cancel
+                    </button> */}
+                    <Button variant="contained" type="submit">
+                      Pay now
+                    </Button>
+                    <Link to="/" style={{ textDecoration: "none" }}>
+                      <Button
+                        variant="contained"
+                        type="text"
+                        color="error"
+                        style={{ marginLeft: "20px" }}
+                      >
+                        Cancel
+                      </Button>
+                    </Link>
+                  </ButtonStyle>
+                </form>
+              </div>
             </div>
           </div>
-        </div>
-      </Container>
+        </Container>
+      )}
     </Wrapper>
   );
 };

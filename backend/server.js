@@ -11,6 +11,7 @@ const {
   handleLogin,
   addNewLocation,
   getUserLocations,
+  getLocation,
   deleteLocation,
   updateLocation,
   addUser,
@@ -27,19 +28,14 @@ express()
   .get("/users", getAllUsers)
   .get("/user/:_id", getUser)
   .get("/locations", getAllLocations)
-  .get("/locations/:_id", getUserLocations)
+  // .get("/locations/:_id", getUserLocations)
+  .get("/location/:_id", getLocation)
   .post("/login", handleLogin)
   .post("/location", addNewLocation)
   .post("/user", addUser)
   .delete("/location", deleteLocation)
   .put("/location", updateLocation)
 
-  //   .get("/flight", getFlight)
-  //   .get("/reservations", getReservations)
-  //   .get("/reservation/:seat", getSingleReservation)
-  //   .post("/reservations", addReservations)
-  //   .delete("/reservation", deleteReservation)
-  //   .put("/reservation", updateReservation)
   //
   // add new endpoints here ☝️
   // ---------------------------------
