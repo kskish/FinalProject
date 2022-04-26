@@ -2,7 +2,6 @@ import React from "react";
 import GoogleMapReact from "google-map-react";
 import { LocationMarker } from "./LocationMarker";
 
-// const AnyReactComponent = ({ text }) => <div>{text}</div>;
 const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
 
 export default function Map({ loadedPlaces }) {
@@ -18,8 +17,7 @@ export default function Map({ loadedPlaces }) {
     //Important! Always set the container height explicitly
     <div style={{ height: "100vh", width: "100%" }}>
       <GoogleMapReact
-        // bootstrapURLKeys={{ key: API_KEY }}
-        bootstrapURLKeys={{ key: "AIzaSyCCvyL_RPdp_Ki1y8RG4gvaWUnZMLg0BPo" }}
+        bootstrapURLKeys={{ key: API_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
       >

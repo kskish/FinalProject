@@ -104,8 +104,6 @@ const PlaceItem = (props) => {
     });
   };
 
-  console.log(props.businessName);
-
   return (
     <Wrapper>
       <h3>{props.businessName}</h3>
