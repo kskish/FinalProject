@@ -5,17 +5,17 @@ import {
   Redirect,
   Switch,
 } from "react-router-dom";
-import Confirmation from "./places/components/Confirmation";
-import DeleteConfirmation from "./places/components/DeleteConfirmation";
-import NewPlace from "./places/pages/NewPlace";
-import UpdatePlace from "./places/pages/UpdatePlace";
-import UserPlaces from "./places/pages/UserPlaces";
-import MainNavigation from "./shared/components/MainNavigation";
-import Auth from "./user/pages/Auth";
-import Users from "./user/pages/Users";
-import { CurrentUserProvider } from "./shared/components/context/AuthContext";
-import Homepage from "./user/pages/Homepage";
-import Registration from "./user/pages/Registration";
+import Confirmation from "./components/Confirmation";
+import DeleteConfirmation from "./components/DeleteConfirmation";
+import NewPlace from "./components/NewPlace";
+import UpdatePlace from "./components/UpdatePlace";
+import UserPlaces from "./components/UserPlaces";
+import MainNavigation from "./components/MainNavigation";
+import Auth from "./components/Auth";
+import Users from "./components/Users";
+import { CurrentUserProvider } from "./components/context/AuthContext";
+import Homepage from "./components/Homepage";
+import Registration from "./components/Registration";
 
 const App = () => {
   return (
@@ -23,9 +23,7 @@ const App = () => {
       <Router>
         <MainNavigation />
         <Switch>
-          {/* Homepage, Display all users */}
           <Route path="/" exact>
-            {/* <Users /> */}
             <Homepage />
           </Route>
           <Route path="/locations" exact>
@@ -34,7 +32,6 @@ const App = () => {
           <Route path="/:userId/places" exact>
             <UserPlaces />
           </Route>
-          {/* Page to add new location */}
           <Route path="/places/new" exact>
             <NewPlace />
           </Route>
@@ -53,7 +50,6 @@ const App = () => {
           <Route path="/registration" exact>
             <Registration />
           </Route>
-          {/* Redirect any unknown pages back to homepage. */}
           <Redirect to="/" />
         </Switch>
       </Router>

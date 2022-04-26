@@ -1,30 +1,22 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import styled from "styled-components";
+// import { useParams } from "react-router";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useHistory } from "react-router";
-// import { AuthContext } from "../../shared/components/context/AuthContext";
+import { AuthContext } from "./context/AuthContext";
 import { Link } from "react-router-dom";
-import img from "../../assets/tesla.jpg";
+import img from "../assets/tesla_black.jpg";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
+import Swal from "sweetalert2";
 
-const Registration = () => {
+const Auth = () => {
   let history = useHistory();
   const [email, setEmail] = useState(null);
   const [password, setPassword] = useState(null);
-  const [businessName, setBusinessName] = useState(null);
   const [open, setOpen] = React.useState(false);
-
-  const handleEmail = (e) => {
-    setEmail(e.target.value);
-  };
-  const handlePassword = (e) => {
-    setPassword(e.target.value);
-  };
-  const handleName = (e) => {
-    setBusinessName(e.target.value);
-  };
+  const { setCurrentUser } = useContext(AuthContext);
 
   const handleClose = (event, reason) => {
     if (reason === "clickaway") {
@@ -33,40 +25,54 @@ const Registration = () => {
 
     setOpen(false);
   };
+
+  const handleEmail = (e) => {
+    setEmail(e.target.value);
+  };
+  const handlePassword = (e) => {
+    setPassword(e.target.value);
+  };
   const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
   });
 
-  const SignUpHandler = (e) => {
+  const SignInHandler = (e) => {
     e.preventDefault();
-    fetch("/user", {
+    fetch("/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        email: email,
-        password: password,
-        businessName: businessName,
+        userEmail: email,
+        userPassword: password,
       }),
     })
       .then((res) => res.json())
       .then((data) => {
         if (data.status === 200) {
+          setCurrentUser(true);
+          sessionStorage.setItem("user", data.data._id);
           setTimeout(function () {
-            history.push("/authenticate");
-          }, 2000);
+            history.push("/");
+            window.location.reload();
+          }, 1000);
           setOpen(true);
-          //   auth.login();
-          //   sessionStorage.setItem("user", data.data._id);
-          //   history.push("/");
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            // text: 'Something went wrong!',
+            text: "Please provide a valid email address and password. If you continue to have issues logging into your account, contact our Support team.",
+            // footer: '<a href="">Why do I have this issue?</a>',
+          });
         }
       });
   };
 
   return (
     <Wrapper>
-      <FormContainer onSubmit={SignUpHandler}>
+      <FormContainer onSubmit={SignInHandler}>
         <Image></Image>
         <Form>
           <Title>
@@ -76,8 +82,8 @@ const Registration = () => {
             <h2 style={{ color: "black" }}>HERE</h2>
           </Title>
           <Text>
-            <p>Sign Up for FREE </p>
-            <p>Create an account and add your location.</p>
+            <p>Welcome back! </p>
+            <p> Log in to your account to view your locations.</p>
           </Text>
           <Email>
             <TextField
@@ -86,8 +92,8 @@ const Registration = () => {
               variant="standard"
               type="email"
               onChange={handleEmail}
-              style={{ width: "80%" }}
               required
+              style={{ width: "80%" }}
             />
           </Email>
           <Password>
@@ -97,48 +103,37 @@ const Registration = () => {
               type="password"
               variant="standard"
               onChange={handlePassword}
-              style={{ width: "80%" }}
               required
+              style={{ width: "80%" }}
             />
           </Password>
-          <BusinessName>
-            <TextField
-              id="standard-basic"
-              label="Your Business Name"
-              // type="password"
-              variant="standard"
-              onChange={handleName}
-              style={{ width: "100%" }}
-              required
-            />
-          </BusinessName>
           <ButtonDiv>
             <Button type="submit" variant="contained">
-              Sign Up
+              Sign In
             </Button>
             <div>
-              <p style={{ marginRight: "5px" }}>Already have an account?</p>
+              <p style={{ marginRight: "5px" }}>Don't have an account yet?</p>
               <Link
-                to={"/authenticate"}
+                to={"/registration"}
                 style={{ textDecoration: "none", color: "#aeaeae" }}
               >
-                <p>Sign In</p>
+                <p>Sign up</p>
               </Link>
             </div>
           </ButtonDiv>
         </Form>
+        <Snackbar
+          open={open}
+          autoHideDuration={2000}
+          onClose={handleClose}
+          style={{ height: "20%" }}
+          anchorOrigin={{ vertical: "bottom", horizontal: "bottom" }}
+        >
+          <Alert onClose={handleClose} severity="success" sx={{ width: "20%" }}>
+            Logged In!
+          </Alert>
+        </Snackbar>
       </FormContainer>
-      <Snackbar
-        open={open}
-        autoHideDuration={2000}
-        onClose={handleClose}
-        style={{ height: "20%" }}
-        anchorOrigin={{ vertical: "bottom", horizontal: "bottom" }}
-      >
-        <Alert onClose={handleClose} severity="success" sx={{ width: "40%" }}>
-          Registered! Please log in to continue.
-        </Alert>
-      </Snackbar>
     </Wrapper>
   );
 };
@@ -148,7 +143,6 @@ const Wrapper = styled.div`
   width: 100vw;
   background-color: white;
   display: flex;
-  /* align-items: center; */
   justify-content: center;
   background: #8e9eab; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -183,7 +177,6 @@ const Form = styled.form`
   display: flex;
   height: 100%;
   width: 60%;
-  /* margin-top: 20px; */
   align-items: center;
   justify-content: center;
   flex-direction: column;
@@ -204,36 +197,17 @@ const Text = styled.div`
 
 const Email = styled.div`
   width: 100%;
-  height: 80px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* & input {
-    width: 30vw;
-  } */
 `;
 const Password = styled.div`
   width: 100%;
-  height: 80px;
+  height: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
-
-  /* & input {
-    width: 30vw;
-  } */
-`;
-const BusinessName = styled.div`
-  width: 80%;
-  height: 80px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  & input {
-    /* width: 30vw; */
-    border: none;
-  }
 `;
 const ButtonDiv = styled.div`
   width: 100%;
@@ -244,6 +218,7 @@ const ButtonDiv = styled.div`
   flex-direction: column;
   margin-right: 50px;
   padding: 10px;
+
   & div {
     font-size: 12px;
     display: flex;
@@ -252,4 +227,4 @@ const ButtonDiv = styled.div`
   }
 `;
 
-export default Registration;
+export default Auth;

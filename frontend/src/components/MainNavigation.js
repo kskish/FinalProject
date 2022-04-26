@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NavLinks from "./UIElements/NavLinks";
+import NavLinks from "./NavLinks";
 import styled from "styled-components";
 
 const MainNavigation = () => {

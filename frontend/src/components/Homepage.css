@@ -1,11 +1,3 @@
-/* div[class*="box"] {
-  height: 33.33%;
-  width: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-} */
-
 .box-2 {
   background-color: #3c3c3c;
 }
@@ -46,7 +38,7 @@
   z-index: 1;
   transition: all 0.5s;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  /* background-color: rgba(255, 255, 255, 0.1); */
+  background-color: rgba(255, 255, 255, 0.1);
   background-color: GREY;
 }
 .btn-two::after {
@@ -59,8 +51,7 @@
   z-index: 1;
   transition: all 0.5s;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  /* background-color: rgba(255, 255, 255, 0.1); */
-  background-color: rgb(54, 54, 54);
+  background-color: green;
 }
 .btn-two:hover::before {
   transform: rotate(-45deg);

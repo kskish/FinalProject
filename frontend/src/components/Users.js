@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from "react";
-import UserList from "../components/UserList";
 import styled from "styled-components";
-// import AnimatedShapes from "../../shared/components/Animation/AnimatedShapes";
-import img from "../../assets/tesla.jpeg";
+import img from "../assets/tesla.jpeg";
+import User from "./User";
 
 const Users = () => {
   //this will store all products from fetch
@@ -23,14 +22,24 @@ const Users = () => {
       });
   }, []);
 
-  {
-    /* send all users via prop */
-  }
   return (
     <Wrapper>
       <MapContainer></MapContainer>
-      <UsersWrapper>{isLoaded && <UserList users={users} />}</UsersWrapper>
-      {/* <AnimatedShapes /> */}
+      <UsersWrapper>
+        {isLoaded && (
+          <>
+            {users.map((user) => {
+              return (
+                <User
+                  key={user._id}
+                  id={user._id}
+                  businessName={user.businessName}
+                />
+              );
+            })}
+          </>
+        )}
+      </UsersWrapper>
     </Wrapper>
   );
 };

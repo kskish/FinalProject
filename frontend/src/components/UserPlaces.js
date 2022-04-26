@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import PlaceList from "../components/PlaceList";
+import PlaceList from "./PlaceList";
 import { useParams } from "react-router";
 import styled from "styled-components";
 import Map from "./Map";

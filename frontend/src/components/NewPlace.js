@@ -5,7 +5,7 @@ import Button from "@mui/material/Button";
 import { useHistory } from "react-router";
 import MuiAlert from "@mui/material/Alert";
 import Snackbar from "@mui/material/Snackbar";
-import img from "../../assets/store.jpg";
+import img from "../assets/store.jpg";
 
 const NewPlace = () => {
   let history = useHistory();

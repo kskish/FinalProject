@@ -1,9 +1,9 @@
 import React from "react";
-import "./UserItem.css";
+import "./User.css";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 
-const UserItem = (props) => {
+const User = (props) => {
   return (
     <Link
       to={`/${props.id}/places`}
@@ -30,4 +30,4 @@ const Card = styled.div`
   }
 `;
 
-export default UserItem;
+export default User;
