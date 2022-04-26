@@ -10,6 +10,10 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogContentText from "@mui/material/DialogContentText";
 import DialogTitle from "@mui/material/DialogTitle";
 import TextField from "@mui/material/TextField";
+import Card from "@mui/material/Card";
+import CardActions from "@mui/material/CardActions";
+import CardContent from "@mui/material/CardContent";
+import Typography from "@mui/material/Typography";
 
 const PlaceItem = (props) => {
   let user = sessionStorage.getItem("user");
@@ -106,47 +110,49 @@ const PlaceItem = (props) => {
 
   return (
     <Wrapper>
-      <h3>{props.businessName}</h3>
-      <p>
-        <strong>Address: </strong>
-        {props.address}
-      </p>
-      <p>
-        <strong>Type of charger:</strong>{" "}
-        {props.chargeType.map((type, index) => {
-          return ` -- ${type}    `;
-        })}
-      </p>
-      <p>
-        <strong>Rate per hour:</strong> {props.rate}.00 $/h
-      </p>
-      <ButtonWrap>
-        <Link
-          to={`/confirmation/${props.id}`}
-          style={{ textDecoration: "none" }}
-        >
-          {!user && (
-            <Button variant="contained" color="success">
-              Rent Here!
-            </Button>
+      <Card sx={{ minWidth: 275 }}>
+        <CardContent>
+          <Typography sx={{ fontSize: 14 }} color="text.secondary" gutterBottom>
+            {props.businessName}
+          </Typography>
+          <Typography variant="h5" component="div">
+            <strong>Address: </strong>
+            {props.address}
+          </Typography>
+          <Typography sx={{ mb: 1.5 }} color="text.secondary">
+            <strong>Type of charger:</strong>{" "}
+            {props.chargeType.map((type, index) => {
+              return ` -- ${type}    `;
+            })}
+          </Typography>
+          <Typography variant="body2">
+            <strong>Rate per hour:</strong> {props.rate}.00 $/h
+          </Typography>
+        </CardContent>
+        <CardActions>
+          <Link
+            to={`/confirmation/${props.id}`}
+            style={{ textDecoration: "none" }}
+          >
+            {!user && <Button size="small">Rent Here</Button>}
+          </Link>
+          {props.creatorId === user && (
+            <>
+              {user && (
+                <Button size="small" onClick={handleClickOpen}>
+                  EDIT
+                </Button>
+              )}
+              {user && (
+                <Button size="small" color="error" onClick={handleClick}>
+                  DELETE
+                </Button>
+              )}
+            </>
           )}
-        </Link>
+        </CardActions>
+      </Card>
 
-        {props.creatorId === user && (
-          <>
-            {user && (
-              <Button variant="contained" onClick={handleClickOpen}>
-                EDIT
-              </Button>
-            )}
-            {user && (
-              <Button variant="contained" color="error" onClick={handleClick}>
-                DELETE
-              </Button>
-            )}
-          </>
-        )}
-      </ButtonWrap>
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>Update Location</DialogTitle>
         <DialogContent>
@@ -197,27 +203,13 @@ const PlaceItem = (props) => {
 };
 
 const Wrapper = styled.div`
-  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px,
-    rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
   border-radius: 10px;
-  margin: 15px auto;
   width: 75%;
-  height: 250px;
-  padding: 15px;
-  background-color: white;
-
-  & h3 {
-    text-decoration: underline;
-    text-decoration-color: green;
-    text-decoration-thickness: 2px;
-  }
-`;
-
-const ButtonWrap = styled.div`
+  //height: 250px;
+  margin: 15px auto;
   display: flex;
-  width: 100%;
-  justify-content: space-evenly;
-  margin-bottom: 10px;
+  justify-content: center;
+  align-items: center;
 `;
 
 export default PlaceItem;
