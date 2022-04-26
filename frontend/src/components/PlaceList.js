@@ -32,7 +32,7 @@ const PlaceList = (props) => {
 };
 
 const Wrapper = styled.div`
-  background-color: #04612e;
+  background-color: #b2beb5;
   height: 100%;
   width: 100%;
 `;

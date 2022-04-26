@@ -8,7 +8,7 @@ export const LocationMarker = () => {
       <Icon
         icon={locationIcon}
         // style={{ color: "#228B22", fontSize: "2.3rem" }}
-        style={{ color: "#01937C", fontSize: "2.3rem" }}
+        style={{ color: "#b2beb5", fontSize: "2.3rem" }}
       />
     </div>
   );

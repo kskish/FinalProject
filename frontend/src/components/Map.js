@@ -1,6 +1,7 @@
 import React from "react";
 import GoogleMapReact from "google-map-react";
 import { LocationMarker } from "./LocationMarker";
+import darkTheme from "./MapStyles";
 
 const API_KEY = `${process.env.REACT_APP_GOOGLE_KEY}`;
 
@@ -20,6 +21,7 @@ export default function Map({ loadedPlaces }) {
         bootstrapURLKeys={{ key: API_KEY }}
         defaultCenter={defaultProps.center}
         defaultZoom={defaultProps.zoom}
+        options={{ styles: darkTheme }}
       >
         {loadedPlaces.map((place) => {
           return <LocationMarker lat={place.lat} lng={place.lng} />;
